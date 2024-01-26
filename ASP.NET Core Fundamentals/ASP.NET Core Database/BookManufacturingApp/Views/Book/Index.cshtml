@@ -1,20 +1,16 @@
-﻿@model List<BookViewModel>
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model List<BookViewModel>
 
 @{
 	ViewData["Title"] = "Home";
 }
 
-<div class="bg-image" 
-     style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
-	        height: 100vh">
-</div>
-
 <div class="text-center">
-	<h2>Welcome to the Book Manufacturing Management System</h2>
+	<h3>These are the books we have collected</h3>
 </div>
 
 <div class="container mt-4">
-	<h3>Recently Added Books</h3>
+	<h3>All Books</h3>
     
 	@if (Model != null && Model.Any())
 	{
@@ -22,7 +18,12 @@
 			<thead>
 			<tr>
 				<th>Title</th>
-				<th>Author</th>
+				<th>Genre</th>
+				<th>Price</th>
+				<td>Information</td>
+				<td>PrintingDate</td>
+				<td>Pages</td>
+				<td>Author</td>
 			</tr>
 			</thead>
 			<tbody>
@@ -30,6 +31,11 @@
 			{
 				<tr>
 					<td>@book.Title</td>
+					<td>@book.Genre</td>
+					<td>@book.Price</td>
+					<td>@book.Information</td>
+					<td>@book.PrintingDate</td>
+					<td>@book.Pages</td>
 					<td>@book.Author.Name</td>
 				</tr>
 			}

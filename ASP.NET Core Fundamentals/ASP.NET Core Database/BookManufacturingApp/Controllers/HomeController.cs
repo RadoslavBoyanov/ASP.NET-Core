@@ -1,6 +1,7 @@
 ﻿using BookManufacturingApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using BookManufacturingApp.Data;
 
 namespace BookManufacturingApp.Controllers
 {
