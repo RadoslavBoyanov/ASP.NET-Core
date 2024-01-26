@@ -1,0 +1,38 @@
+﻿@model List<BookViewModel>
+
+@{
+	ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+	<h2>Welcome to the Book Manufacturing Management System</h2>
+</div>
+
+<div class="container mt-4">
+	<h3>Recently Added Books</h3>
+    
+	@if (Model != null && Model.Any())
+	{
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Title</th>
+				<th>Author</th>
+			</tr>
+			</thead>
+			<tbody>
+			@foreach (var book in Model)
+			{
+				<tr>
+					<td>@book.Title</td>
+					<td>@book.Author.Name</td>
+				</tr>
+			}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No books available.</p>
+	}
+</div>
