@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoppingList.Contracts;
 using ShoppingList.Data;
+using ShoppingList.Data.Models;
 using ShoppingList.Models;
 
 namespace ShoppingList.Services
@@ -14,9 +15,21 @@ namespace ShoppingList.Services
             _dbContext = context;
         }
 
+        public async Task AddProductAsync(ProductViewModel product)
+        {
+            var entity = new Product()
+            {
+                Name = product.Name,
+            };
+
+            await _dbContext.Products.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public Task<List<ProductViewModel>> GetAllProductsAsync()
         {
             return _dbContext.Products
+                .AsNoTracking()
                 .Select(p => new ProductViewModel
                 {
                     Id = p.Id,
@@ -24,24 +37,46 @@ namespace ShoppingList.Services
                 }).ToListAsync();
         }
 
-        public Task AddProductAsync(ProductViewModel product)
+        public async Task UpdateProductAsync(int id, ProductViewModel product)
         {
-            throw new NotImplementedException();
+            var entity = await _dbContext.Products.FindAsync(product.Id);
+
+            if (entity is null)
+            {
+                throw new ArgumentException("Invalid product!");
+            }
+
+            entity.Name = product.Name;
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task UpdateProductAsync(int id, ProductViewModel product)
+        public async Task DeleteProductAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity = await _dbContext.Products.FindAsync(id);
+
+            if (entity is null)
+            {
+                throw new ArgumentException("Invalid product!");
+            }
+
+            _dbContext.Products.Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteProductAsync(int id)
+        public async Task<ProductViewModel> GetProductByIdAsync(int id)
         {
-            throw new NotImplementedException();
-        }
+            var entity = await _dbContext.Products.FindAsync(id);
 
-        public Task<ProductViewModel> GetProductByIdAsync(int id)
-        {
-            throw new NotImplementedException();
+            if (entity is null)
+            {
+                throw new ArgumentException("Invalid product!");
+            }
+
+            return new ProductViewModel()
+            {
+                Id = id,
+                Name = entity.Name,
+            };
         }
     }
 }
