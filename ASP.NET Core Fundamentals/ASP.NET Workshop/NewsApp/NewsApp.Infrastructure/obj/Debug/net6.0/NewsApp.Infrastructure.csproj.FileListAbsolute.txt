@@ -1,0 +1,17 @@
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\bin\Debug\net6.0\NewsApp.Infrastructure.deps.json
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\bin\Debug\net6.0\NewsApp.Infrastructure.runtimeconfig.json
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\bin\Debug\net6.0\NewsApp.Infrastructure.dll
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\bin\Debug\net6.0\NewsApp.Infrastructure.pdb
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\bin\Debug\net6.0\NewsApp.Common.dll
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\bin\Debug\net6.0\NewsApp.Common.pdb
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\NewsApp.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\NewsApp.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\NewsApp.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\NewsApp.Infrastructure.AssemblyInfo.cs
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\NewsApp.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\NewsApp.Infrastructure.csproj.CopyComplete
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\NewsApp.Infrastructure.dll
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\refint\NewsApp.Infrastructure.dll
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\NewsApp.Infrastructure.pdb
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\NewsApp.Infrastructure.genruntimeconfig.cache
+C:\Users\user\source\repos\ExerciseMVCWithoutIdentity\NewsApp.Infrastructure\obj\Debug\net6.0\ref\NewsApp.Infrastructure.dll
