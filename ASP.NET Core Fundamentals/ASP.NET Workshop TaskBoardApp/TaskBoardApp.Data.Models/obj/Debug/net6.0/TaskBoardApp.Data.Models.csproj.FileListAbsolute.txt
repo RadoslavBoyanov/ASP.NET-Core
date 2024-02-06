@@ -1,0 +1,15 @@
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\bin\Debug\net6.0\TaskBoardApp.Data.Models.deps.json
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\bin\Debug\net6.0\TaskBoardApp.Data.Models.dll
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\bin\Debug\net6.0\TaskBoardApp.Data.Models.pdb
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\bin\Debug\net6.0\TaskBoardApp.Common.dll
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\bin\Debug\net6.0\TaskBoardApp.Common.pdb
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\obj\Debug\net6.0\TaskBoardApp.Data.Models.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\obj\Debug\net6.0\TaskBoardApp.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\obj\Debug\net6.0\TaskBoardApp.Data.Models.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\obj\Debug\net6.0\TaskBoardApp.Data.Models.AssemblyInfo.cs
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\obj\Debug\net6.0\TaskBoardApp.Data.Models.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\obj\Debug\net6.0\TaskBoardApp.Data.Models.csproj.CopyComplete
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\obj\Debug\net6.0\TaskBoardApp.Data.Models.dll
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\obj\Debug\net6.0\refint\TaskBoardApp.Data.Models.dll
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\obj\Debug\net6.0\TaskBoardApp.Data.Models.pdb
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Data.Models\obj\Debug\net6.0\ref\TaskBoardApp.Data.Models.dll

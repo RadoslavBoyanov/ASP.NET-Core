@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "TaskBoardApp.Web.ViewModels/1.0.0": {
+        "dependencies": {
+          "TaskBoardApp.Common": "1.0.0"
+        },
+        "runtime": {
+          "TaskBoardApp.Web.ViewModels.dll": {}
+        }
+      },
+      "TaskBoardApp.Common/1.0.0": {
+        "runtime": {
+          "TaskBoardApp.Common.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TaskBoardApp.Web.ViewModels/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TaskBoardApp.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,15 @@
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\bin\Debug\net6.0\TaskBoardApp.Web.ViewModels.deps.json
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\bin\Debug\net6.0\TaskBoardApp.Web.ViewModels.dll
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\bin\Debug\net6.0\TaskBoardApp.Web.ViewModels.pdb
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\bin\Debug\net6.0\TaskBoardApp.Common.dll
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\bin\Debug\net6.0\TaskBoardApp.Common.pdb
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\obj\Debug\net6.0\TaskBoardApp.Web.ViewModels.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\obj\Debug\net6.0\TaskBoardApp.Web.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\obj\Debug\net6.0\TaskBoardApp.Web.ViewModels.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\obj\Debug\net6.0\TaskBoardApp.Web.ViewModels.AssemblyInfo.cs
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\obj\Debug\net6.0\TaskBoardApp.Web.ViewModels.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\obj\Debug\net6.0\TaskBoardApp.Web.ViewModels.csproj.CopyComplete
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\obj\Debug\net6.0\TaskBoardApp.Web.ViewModels.dll
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\obj\Debug\net6.0\refint\TaskBoardApp.Web.ViewModels.dll
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\obj\Debug\net6.0\TaskBoardApp.Web.ViewModels.pdb
+C:\Users\user\source\repos\TaskBoardApp\TaskBoardApp.Web.ViewModels\obj\Debug\net6.0\ref\TaskBoardApp.Web.ViewModels.dll
