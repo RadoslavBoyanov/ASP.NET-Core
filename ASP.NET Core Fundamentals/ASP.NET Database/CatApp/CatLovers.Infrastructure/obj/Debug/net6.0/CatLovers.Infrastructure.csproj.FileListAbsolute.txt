@@ -1,0 +1,17 @@
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\bin\Debug\net6.0\CatLovers.Infrastructure.deps.json
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\bin\Debug\net6.0\CatLovers.Infrastructure.runtimeconfig.json
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\bin\Debug\net6.0\CatLovers.Infrastructure.dll
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\bin\Debug\net6.0\CatLovers.Infrastructure.pdb
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\bin\Debug\net6.0\CatLovers.Common.dll
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\bin\Debug\net6.0\CatLovers.Common.pdb
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\CatLovers.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\CatLovers.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\CatLovers.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\CatLovers.Infrastructure.AssemblyInfo.cs
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\CatLovers.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\CatLovers.Infrastructure.csproj.CopyComplete
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\CatLovers.Infrastructure.dll
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\refint\CatLovers.Infrastructure.dll
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\CatLovers.Infrastructure.pdb
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\CatLovers.Infrastructure.genruntimeconfig.cache
+C:\Users\user\source\repos\CatApp\CatLovers.Infrastructure\obj\Debug\net6.0\ref\CatLovers.Infrastructure.dll

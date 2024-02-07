@@ -1,0 +1,11 @@
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\bin\Debug\net6.0\CatLovers.Common.deps.json
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\bin\Debug\net6.0\CatLovers.Common.dll
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\bin\Debug\net6.0\CatLovers.Common.pdb
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\obj\Debug\net6.0\CatLovers.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\obj\Debug\net6.0\CatLovers.Common.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\obj\Debug\net6.0\CatLovers.Common.AssemblyInfo.cs
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\obj\Debug\net6.0\CatLovers.Common.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\obj\Debug\net6.0\CatLovers.Common.dll
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\obj\Debug\net6.0\refint\CatLovers.Common.dll
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\obj\Debug\net6.0\CatLovers.Common.pdb
+C:\Users\user\source\repos\CatApp\Cat.Lovers.Common\obj\Debug\net6.0\ref\CatLovers.Common.dll
