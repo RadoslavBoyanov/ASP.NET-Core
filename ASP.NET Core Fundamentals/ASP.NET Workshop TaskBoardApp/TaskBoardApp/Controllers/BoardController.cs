@@ -18,7 +18,7 @@ namespace TaskBoardApp.Controllers
 		[HttpGet]
 		public async Task<IActionResult> All()
 		{
-			IEnumerable<BoardAllViewModel> allViewModels = await this.boardService.AllAsync();
+			var allViewModels = await this.boardService.AllAsync();
 
 			return View(allViewModels);
 		}

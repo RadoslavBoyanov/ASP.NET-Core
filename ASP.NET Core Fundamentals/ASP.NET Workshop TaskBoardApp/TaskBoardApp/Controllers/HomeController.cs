@@ -1,32 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using TaskBoardApp.Models;
+using System.Security.Claims;
+using TaskBoardApp.Services.Contracts;
+using TaskBoardApp.Web.ViewModels.Home;
 
 namespace TaskBoardApp.Controllers
 {
-	public class HomeController : Controller
+    public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
+		private readonly IHomeService _homeService;
 
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
-		}
+		public HomeController(IHomeService homeService)
+        {
+            _homeService = homeService;
+        }
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			return View();
-		}
+            int userTaskCount = 0;
+            if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                userTaskCount = await _homeService.GetUserTasksCountAsync(GetUserId());
+            }
+            HomeViewModel homeViewModel = await _homeService.ConfigureHomeViewModelAsync();
+            homeViewModel.UserTasksCount = userTaskCount;
 
-		public IActionResult Privacy()
-		{
-			return View();
-		}
-
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-	}
+            return View(homeViewModel);
+        }
+        private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
+    }
 }

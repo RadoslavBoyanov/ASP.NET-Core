@@ -4,8 +4,13 @@ namespace TaskBoardApp.Web.ViewModels.Board
 {
 	public class BoardAllViewModel
 	{
-		public string Name { get; set; } = null!;
+        public BoardAllViewModel()
+        {
+            Tasks = new List<TaskViewModel>();
+        }
+        public int Id { get; init; }
 
-		public ICollection<TaskViewModel> Tasks { get; set; } = null!;
-	}
+        public string Name { get; set; } = null!;
+        public IEnumerable<TaskViewModel> Tasks { get; set; } = null!;
+    }
 }

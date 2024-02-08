@@ -6,7 +6,7 @@ using TaskBoardApp.Web.ViewModels.Task;
 
 namespace TaskBoardApp.Services
 {
-	public class BoardService : IBoardService
+    public class BoardService : IBoardService
 	{
 		private readonly TaskBoardAppDbContext _context;
 
@@ -17,37 +17,32 @@ namespace TaskBoardApp.Services
 
 		public async Task<IEnumerable<BoardAllViewModel>> AllAsync()
 		{
-			IEnumerable<BoardAllViewModel> allBoards = await this._context
-				.Boards
-				.Select(b => new BoardAllViewModel()
-				{
-					Name = b.Name,
-					Tasks = b.Tasks
-						.Select(t=> new TaskViewModel()
-						{
-							Id = t.Id.ToString(),
-							Title = t.Title,
-							Description = t.Description,
-							Owner = t.Owner.UserName
-						})
-						.ToArray()
-				})
-				.ToArrayAsync();
-
-			return allBoards;
-		}
-
-        public async Task<IEnumerable<BoardSelectViewModel>> AllForSelectAsync()
-        {
-            IEnumerable<BoardSelectViewModel> allBoards = await this._context.Boards
-                .Select(b => new BoardSelectViewModel()
+            List<BoardAllViewModel> boards = await _context
+                .Boards.Select(b => new BoardAllViewModel()
                 {
-					Id = b.Id,
-					Name = b.Name
-                })
-                .ToArrayAsync();
+                    Id = b.Id,
+                    Name = b.Name,
+                    Tasks = b.Tasks.Select(t => new TaskViewModel()
+                    {
+                        Id = t.Id,
+                        Title = t.Title,
+                        Description = t.Description,
+                        Owner = t.Owner.NormalizedUserName
+                    })
+                }).ToListAsync();
+            return boards;
+        }
 
-            return allBoards;
+        public async Task<IEnumerable<TaskBoardFormModel>> GetExistingBoards()
+        {
+            IEnumerable<TaskBoardFormModel> existingBoards = await _context
+                .Boards.Select(b => new TaskBoardFormModel()
+                {
+                    Id = b.Id,
+                    Name = b.Name,
+                }).ToListAsync();
+
+            return existingBoards;
         }
 
         public async Task<bool> ExistsByIdAsync(int id)

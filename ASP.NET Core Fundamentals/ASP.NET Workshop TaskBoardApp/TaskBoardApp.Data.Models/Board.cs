@@ -3,11 +3,11 @@ using static TaskBoardApp.Common.EntityValidationConstants.Board;
 
 namespace TaskBoardApp.Data.Models
 {
-	public class Board
+    public class Board
 	{
 		public Board()
 		{
-			this.Tasks = new HashSet<Task>();
+			this.Tasks = new List<Task>();
 		}
 
 		[Key]
@@ -17,6 +17,6 @@ namespace TaskBoardApp.Data.Models
 		[MaxLength(BoardMaxName)]
 		public string Name { get; set; }
 
-		public virtual ICollection<Task> Tasks { get; set; }
-	}
+        public virtual IEnumerable<Task> Tasks { get; set; } = null!;
+    }
 }

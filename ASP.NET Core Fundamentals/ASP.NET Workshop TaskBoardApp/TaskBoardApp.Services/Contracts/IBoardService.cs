@@ -1,4 +1,5 @@
 ﻿using TaskBoardApp.Web.ViewModels.Board;
+using TaskBoardApp.Web.ViewModels.Task;
 
 namespace TaskBoardApp.Services.Contracts
 {
@@ -6,8 +7,8 @@ namespace TaskBoardApp.Services.Contracts
 	{
 		Task<IEnumerable<BoardAllViewModel>> AllAsync();
 
-        Task<IEnumerable<BoardSelectViewModel>> AllForSelectAsync();
-
         Task<bool> ExistsByIdAsync(int id);
+
+        Task<IEnumerable<TaskBoardFormModel>> GetExistingBoards();
     }
 }

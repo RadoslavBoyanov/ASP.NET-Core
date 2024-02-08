@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using TaskBoardApp.Services.Contracts;
 using TaskBoardApp.Web.ViewModels.Task;
 using TaskBoardApp.Extensions;
+using System.Security.Claims;
+using TaskBoardApp.Services;
 
 namespace TaskBoardApp.Controllers
 {
@@ -21,53 +23,102 @@ namespace TaskBoardApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            TaskFormModel model = new TaskFormModel()
+            TaskFormModel taskFormModel = new TaskFormModel()
             {
-                AllBoards = await this._boardService.AllForSelectAsync()
+                AllBoards = await this._boardService.GetExistingBoards()
             };
 
-            return this.View(model);
+            return View(taskFormModel);
         }
-
         [HttpPost]
-        public async Task<IActionResult> Create(TaskFormModel model)
+        public async Task<IActionResult> Create(TaskFormModel taskFormModel)
         {
+            IEnumerable<TaskBoardFormModel> existingBoards = await _boardService.GetExistingBoards();
+            if (!existingBoards.Any(b => b.Id == taskFormModel.BoardId))
+            {
+                ModelState.AddModelError(nameof(taskFormModel.BoardId), "Board does not exist");
+            }
+            string currentUserId = GetUserId();
             if (!ModelState.IsValid)
             {
-                model.AllBoards = await this._boardService.AllForSelectAsync();
-                return this.View(model);
+                taskFormModel.AllBoards = existingBoards;
+                return View(taskFormModel);
             }
+            await _taskService.AddAsync(taskFormModel, currentUserId);
 
-            bool boardExist = await this._boardService
-                .ExistsByIdAsync(model.BoardId);
-            if (!boardExist)
-            {
-                ModelState.AddModelError(nameof(model.BoardId), "Selected board does not exist!");
-                model.AllBoards = await this._boardService.AllForSelectAsync();
-                return this.View(model);
-            }
-
-            string currentUserId = this.User.GetId();
-
-            await this._taskService.AddAsync(currentUserId, model);
-
-            return this.RedirectToAction("All", "Board");
+            return RedirectToAction("All", "Board");
         }
-
         [HttpGet]
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
             try
             {
-                TaskDetailsViewModel viewModel =
-                    await this._taskService.GetForDetailsByIdAsync(id);
-
-                return this.View(viewModel);
+                TaskDetailsViewModel model = await _taskService.GetForDetailsByIdAsync(id);
+                return View(model);
             }
             catch (Exception)
             {
-                return this.RedirectToAction("All", "Board");
+                return BadRequest();
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            try
+            {
+                TaskFormModel taskFormModel = await _taskService.GetTaskToEditAsync(id, GetUserId());
+                return View(taskFormModel);
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest();
+            }
+            catch (InvalidOperationException)
+            {
+                return Unauthorized();
+            }
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, TaskFormModel taskFormModel)
+        {
+            await _taskService.EditTaskByIdAsync(id, taskFormModel);
+            return RedirectToAction("All", "Board");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                TaskViewModel taskViewModel = await _taskService.GetTaskToDeleteAsync(id, GetUserId());
+                return View(taskViewModel);
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest();
+            }
+            catch (InvalidOperationException)
+            {
+                return Unauthorized();
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(TaskViewModel taskViewModel)
+        {
+            try
+            {
+                await _taskService.DeleteTaskAsync(taskViewModel, GetUserId());
+                return RedirectToAction("All", "Board");
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest();
+            }
+            catch (InvalidOperationException)
+            {
+                return Unauthorized();
+            }
+        }
+        private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
     }
 }

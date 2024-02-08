@@ -8,13 +8,8 @@ namespace TaskBoardApp.Data.Models
 {
 	public class Task
 	{
-		public Task()
-		{
-			this.Id = Guid.NewGuid();
-		}
-
-		[Key]
-		public Guid Id { get; set; }
+        [Key]
+		public int Id { get; set; }
 
 		[Required]
 		[MaxLength(TaskMaxTitle)]
@@ -26,12 +21,13 @@ namespace TaskBoardApp.Data.Models
 
 		public DateTime CreatedOn { get; set; }
 
-		public int BoardId { get; set; }
-		public virtual Board Board { get; set; } = null!;
+		[ForeignKey(nameof(Board))]
+		public int? BoardId { get; set; }
+		public Board? Board { get; set; } 
 
 		[Required]
 		[ForeignKey(nameof(Owner))] 
-		public string OwnerId { get; set; } = string.Empty;
+		public string OwnerId { get; set; } = null!;
 		public virtual IdentityUser Owner { get; set; } = null!; 
 	}
 }

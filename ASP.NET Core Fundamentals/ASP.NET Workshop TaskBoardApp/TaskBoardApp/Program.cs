@@ -6,7 +6,7 @@ using TaskBoardApp.Services.Contracts;
 
 namespace TaskBoardApp
 {
-	public class Program
+    public class Program
 	{
 		public static void Main(string[] args)
 		{
@@ -17,8 +17,13 @@ namespace TaskBoardApp
 			builder.Services.AddDbContext<TaskBoardAppDbContext>(options =>
 				options.UseSqlServer(connectionString));
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+            });
 
-			builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 				{
 					options.SignIn.RequireConfirmedAccount = false;
 					options.Password.RequireDigit = false;
@@ -30,8 +35,9 @@ namespace TaskBoardApp
 
 			builder.Services.AddScoped<IBoardService, BoardService>();
 			builder.Services.AddScoped<ITaskService, TaskService>();
+			builder.Services.AddScoped<IHomeService, HomeService> ();
 
-			builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews();
 
 			var app = builder.Build();
 

@@ -24,6 +24,7 @@ namespace TaskBoardApp.Data.Data.Configurations
 			{
 				new Task()
 				{
+					Id = 1,
 					Title = "Improve CSS styles",
 					Description = "Implement better styling for all public pages",
 					CreatedOn = DateTime.UtcNow.AddDays(-200),
@@ -32,6 +33,7 @@ namespace TaskBoardApp.Data.Data.Configurations
 				},
 				new Task()
 				{
+					Id = 2,
 					Title = "Android Client App",
 					Description = "Create Android client App for the RESTful TaskBoard service",
 					CreatedOn = DateTime.UtcNow.AddMonths(-5),
@@ -40,6 +42,7 @@ namespace TaskBoardApp.Data.Data.Configurations
 				},
 				new Task()
 				{
+					Id = 3,
 					Title = "Desktop Client App",
 					Description = "Create Desktop client App for the RESTful TaskBoard service",
 					CreatedOn = DateTime.UtcNow.AddMonths(-1),
@@ -48,6 +51,7 @@ namespace TaskBoardApp.Data.Data.Configurations
 				},
 				new Task()
 				{
+					Id = 4,
 					Title = "Create Tasks",
 					Description = "Implement [Create Task] page for adding tasks",
 					CreatedOn = DateTime.UtcNow.AddYears(-1),
