@@ -12,25 +12,28 @@ namespace SoftUniBazar.Data
         }
 
         public DbSet<Ad> Ads { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<AdBuyer> AdsBuyers { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<AdBuyer> AdsBuyers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AdBuyer>()
-                .HasKey(e => new { e.BuyerId, e.AdId });
+            modelBuilder.Entity<AdBuyer>().HasKey(key => new
+            {
+                key.BuyerId, key.AdId
+            });
 
             modelBuilder.Entity<AdBuyer>()
-               .HasOne(e => e.Ad)
-               .WithMany()
-               .HasForeignKey(e => e.AdId)
-               .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<AdBuyer>()
-                .HasOne(e => e.Buyer)
+                .HasOne(ab => ab.Ad)
                 .WithMany()
-                .HasForeignKey(e => e.BuyerId)
+                .HasForeignKey(a => a.AdId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<AdBuyer>()
+                .HasOne(ab => ab.Buyer)
+                .WithMany()
+                .HasForeignKey(a => a.BuyerId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder

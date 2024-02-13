@@ -1,159 +1,162 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 using SoftUniBazar.Data;
 using SoftUniBazar.Data.Models;
 using SoftUniBazar.Models.Ad;
 using SoftUniBazar.Models.Category;
+using System.Security.Claims;
+using static SoftUniBazar.GlobalConstants.EntityValidations.Ad;
+
 
 namespace SoftUniBazar.Controllers
 {
     [Authorize]
     public class AdController : Controller
     {
-        private readonly BazarDbContext _data;
+        private readonly BazarDbContext _dbContext;
 
-        public AdController(BazarDbContext data)
+        public AdController(BazarDbContext dbContext)
         {
-            _data = data;
+            _dbContext = dbContext;
         }
-
-
         public async Task<IActionResult> Add()
         {
-            AdFormModel adModel = new AdFormModel()
+            AdFormModelView model = new AdFormModelView()
             {
                 Categories = GetCategories()
             };
 
-            return View(adModel);
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AdFormModel adModel)
+        public async Task<IActionResult> Add(AdFormModelView model)
         {
-            if (!GetCategories().Any(e => e.Id == adModel.CategoryId))
+            if (!GetCategories().Any(e => e.Id == model.CategoryId))
             {
-                ModelState.AddModelError(nameof(adModel.CategoryId), "Category does not exist!");
+                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist!");
             }
 
             if (!ModelState.IsValid)
             {
-                return View(adModel);
+                return View(model);
             }
 
-            string currentUserId = GetUserId();
+            string userId = GetUserId();
 
             var adToAdd = new Ad()
             {
-                Name = adModel.Name,
-                Description = adModel.Description,
+                Name = model.Name,
+                Description = model.Description,
                 CreatedOn = DateTime.Now,
-                CategoryId = adModel.CategoryId,
-                Price = adModel.Price,
-                OwnerId = currentUserId,
-                ImageUrl = adModel.ImageUrl
+                CategoryId = model.CategoryId,
+                Price = model.Price,
+                OwnerId = userId,
+                ImageUrl = model.ImageUrl
             };
 
-            await _data.Ads.AddAsync(adToAdd);
-            await _data.SaveChangesAsync();
+            await _dbContext.AddAsync(adToAdd);
+            await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("All", "Ad");
         }
 
         public async Task<IActionResult> All()
         {
-            var adsToDisplay = await _data
-                .Ads
-                .Select(e => new AdViewModel()
-                {
-                    Id = e.Id,
-                    Name = e.Name,
-                    Description = e.Description,
-                    CreatedOn = e.CreatedOn.ToString("dd/MM/yyyy H:mm"),
-                    Category = e.Category.Name,
-                    Price = e.Price,
-                    Owner = e.Owner.UserName,
-                    ImageUrl = e.ImageUrl,
-                })
+            var ads = await _dbContext.Ads
+                .AsNoTracking()
+                .Select(a => new AdAllViewModel()
+                    {
+                    Id = a.Id,
+                    Name = a.Name,
+                    Description = a.Description,
+                    CreatedOn = a.CreatedOn.ToString(DateTimeFormat),
+                    Category = a.Category.Name,
+                    Price = a.Price,
+                    Owner = a.Owner.UserName,
+                    ImageUrl = a.ImageUrl
+                    })
                 .ToListAsync();
 
-            return View(adsToDisplay);
+            return View(ads);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var adToEdit = await _data.Ads.FindAsync(id);
+            var ad = await _dbContext.Ads
+                .FindAsync(id);
 
-            if (adToEdit == null)
+            if (ad is null)
             {
                 return BadRequest();
             }
 
-            string currentUserId = GetUserId();
-            if (currentUserId != adToEdit.OwnerId)
+            if (ad.OwnerId != GetUserId())
             {
                 return Unauthorized();
             }
 
-            AdFormModel adModel = new AdFormModel()
+            var model = new AdFormModelView()
             {
-                Name = adToEdit.Name,
-                Description = adToEdit.Description,
-                Price = adToEdit.Price,
-                CategoryId = adToEdit.CategoryId,
+                Name = ad.Name,
+                Description = ad.Description,
+                Price = ad.Price,
+                CategoryId = ad.CategoryId,
                 Categories = GetCategories(),
-                ImageUrl = adToEdit.ImageUrl
+                ImageUrl = ad.ImageUrl
             };
 
-            return View(adModel);
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, AdFormModel adModel)
+        public async Task<IActionResult> Edit(int id, AdFormModelView model)
         {
-            var adToEdit = await _data.Ads.FindAsync(id);
+            var adToEdit =  await _dbContext.Ads
+                .FindAsync(id);
 
-            if (adToEdit == null)
+            if (adToEdit is null)
             {
                 return BadRequest();
             }
 
-            string currentUser = GetUserId();
-            if (currentUser != adToEdit.OwnerId)
+            if (adToEdit.OwnerId != GetUserId())
             {
                 return Unauthorized();
             }
 
-            if (!GetCategories().Any(e => e.Id == adModel.CategoryId))
+            if (!GetCategories().Any(c=>c.Id == adToEdit.CategoryId))
             {
-                ModelState.AddModelError(nameof(adModel.CategoryId), "Category does not exist!");
+                ModelState.AddModelError(nameof(adToEdit.CategoryId), "Category does not exist!");
             }
 
-            adToEdit.Name = adModel.Name;
-            adToEdit.Description = adModel.Description;
-            adToEdit.Price = adModel.Price;
-            adToEdit.CategoryId = adModel.CategoryId;
-            adToEdit.ImageUrl = adModel.ImageUrl;
+            adToEdit.Name = model.Name;
+            adToEdit.Description = model.Description;
+            adToEdit.Price = model.Price;
+            adToEdit.ImageUrl = model.ImageUrl;
+            adToEdit.CategoryId = model.CategoryId;
 
-            await _data.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
             return RedirectToAction("All", "Ad");
         }
 
+        [HttpGet]
         public async Task<IActionResult> Cart()
         {
-            string currentUserId = GetUserId();
+            var userId = GetUserId();
 
-            var userAds = await _data
+            var userAds = await _dbContext
                 .AdsBuyers
-                .Where(ab => ab.BuyerId == currentUserId)
-                .Select(ab => new AdViewModel()
+                .AsNoTracking()
+                .Where(ab => ab.BuyerId == userId)
+                .Select(ab => new AdAllViewModel()
                 {
                     Id = ab.Ad.Id,
                     Name = ab.Ad.Name,
                     Description = ab.Ad.Description,
-                    CreatedOn = ab.Ad.CreatedOn.ToString("dd/MM/yyyy H:mm"),
+                    CreatedOn = ab.Ad.CreatedOn.ToString(DateTimeFormat),
                     Category = ab.Ad.Category.Name,
                     Price = ab.Ad.Price,
                     ImageUrl = ab.Ad.ImageUrl,
@@ -164,32 +167,31 @@ namespace SoftUniBazar.Controllers
             return View(userAds);
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddToCart(int id)
         {
-            var adToAdd = await _data
-                .Ads
-                .FindAsync(id);
+            var adToAdd = await _dbContext.Ads.FindAsync(id);
 
             if (adToAdd == null)
             {
                 return BadRequest();
             }
 
-            string currentUserId = GetUserId();
+            var userId = GetUserId();
 
-            var entry = new AdBuyer()
+            var newEntry = new AdBuyer()
             {
                 AdId = adToAdd.Id,
-                BuyerId = currentUserId,
+                BuyerId = userId
             };
 
-            if (await _data.AdsBuyers.ContainsAsync(entry))
+            if (await _dbContext.AdsBuyers.ContainsAsync(newEntry))
             {
                 return RedirectToAction("Cart", "Ad");
             }
 
-            await _data.AdsBuyers.AddAsync(entry);
-            await _data.SaveChangesAsync();
+            await _dbContext.AdsBuyers.AddAsync(newEntry);
+            await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("Cart", "Ad");
         }
@@ -197,35 +199,36 @@ namespace SoftUniBazar.Controllers
         public async Task<IActionResult> RemoveFromCart(int id)
         {
             var adId = id;
-            var currentUser = GetUserId();
+            var userId = GetUserId();
 
-            var adToRemove = _data.Ads.FindAsync(adId);
-
+            var adToRemove = await _dbContext.Ads.FindAsync(adId);
             if (adToRemove == null)
             {
                 return BadRequest();
             }
 
-            var entry = await _data.AdsBuyers.FirstOrDefaultAsync(ab => ab.BuyerId == currentUser && ab.AdId == adId);
-            _data.AdsBuyers.Remove(entry);
-            await _data.SaveChangesAsync();
+            var entry = await _dbContext.AdsBuyers
+                .FirstOrDefaultAsync(ab => ab.BuyerId == userId && ab.AdId == adId);
+            _dbContext.AdsBuyers.Remove(entry);
+            await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("All", "Ad");
         }
 
-        // Helper methods
-        // Get Categories
-        private IEnumerable<CategoryViewModel> GetCategories()
-            => _data
-                .Categories
-                .Select(t => new CategoryViewModel()
-                {
-                    Id = t.Id,
-                    Name = t.Name
-                });
 
-        // Get currently logged-in user's Id
+        private IEnumerable<CategoryFormModelView> GetCategories()
+        {
+            return _dbContext.Categories
+                .Select(c => new CategoryFormModelView()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                });
+        }
+
         private string GetUserId()
-           => User.FindFirstValue(ClaimTypes.NameIdentifier);
+        {
+            return User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+        }
     }
 }

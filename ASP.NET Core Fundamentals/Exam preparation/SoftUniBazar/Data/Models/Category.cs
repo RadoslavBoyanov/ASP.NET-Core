@@ -1,15 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static SoftUniBazar.Data.DataConstants;
+using Microsoft.EntityFrameworkCore;
+using static SoftUniBazar.GlobalConstants.EntityValidations.Category;
 
 namespace SoftUniBazar.Data.Models
 {
+    /// <summary>
+    /// class for Category
+    /// </summary>
     public class Category
     {
+        [Key]
+        [Comment("Category id")]
         public int Id { get; set; }
 
-        [StringLength(CategoryNameMax)]
-        public string Name { get; set; } = null!;
+        [Required]
+        [MaxLength(CategoryNameMaxLength)]
+        [Comment("Category name")]
+        public string Name { get; set; } = string.Empty;
 
-        public virtual IEnumerable<Ad> Ads { get; set; } = new List<Ad>();
+        [Comment("Collection of ads in this category")]
+        public ICollection<Ad> Ads { get; set; } = new List<Ad>();
     }
 }
